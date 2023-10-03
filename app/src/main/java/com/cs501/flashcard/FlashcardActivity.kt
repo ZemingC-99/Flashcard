@@ -1,3 +1,11 @@
+/*
+References:
+https://stackoverflow.com/questions/16769654/how-to-use-onsaveinstancestate-and-onrestoreinstancestate
+https://www.geeksforgeeks.org/how-to-create-landscape-layout-in-android-studio/#
+https://www.geeksforgeeks.org/application-manifest-file-in-android/
+https://www.geeksforgeeks.org/relative-layout-in-android/
+https://stackoverflow.com/questions/55645273/how-to-disable-a-button-in-kotlin
+ */
 package com.cs501.flashcard
 
 import android.os.Bundle
@@ -25,9 +33,11 @@ class FlashcardActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_flashcard)
 
-        val username = intent.getStringExtra("USERNAME")
-        if (username != null) {
-            Toast.makeText(this, "Welcome $username !", Toast.LENGTH_SHORT).show()
+        if (savedInstanceState == null) {
+            val username = intent.getStringExtra("USERNAME")
+            if (username != null) {
+                Toast.makeText(this, "Welcome $username !", Toast.LENGTH_SHORT).show()
+            }
         }
 
         operand1TextView = findViewById(R.id.op1TextView)
@@ -36,6 +46,17 @@ class FlashcardActivity : AppCompatActivity() {
         answerEditText = findViewById(R.id.answerEditText)
         submitButton = findViewById(R.id.submitAnswerButton)
         generateButton = findViewById(R.id.generateProblemsButton)
+
+        savedInstanceState?.let {
+            currentAnswer = it.getInt("CURRENT_ANSWER")
+            questionsAnswered = it.getInt("QUESTIONS_ANSWERED")
+            correctAnswered = it.getInt("CORRECT_ANSWERED")
+            operand1TextView.text = it.getString("OPERAND_1_TEXT")
+            operand2TextView.text = it.getString("OPERAND_2_TEXT")
+            operatorTextView.text = it.getString("OPERATOR_TEXT")
+            generateButton.isEnabled = it.getBoolean("GENERATE_BUTTON_STATE")
+            submitButton.isEnabled = it.getBoolean("SUBMIT_BUTTON_STATE")
+        }
 
         generateButton.setOnClickListener {
             generateRandomProblem()
@@ -61,6 +82,19 @@ class FlashcardActivity : AppCompatActivity() {
                 Toast.makeText(this, "Please enter an answer", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+
+        outState.putInt("CURRENT_ANSWER", currentAnswer)
+        outState.putInt("QUESTIONS_ANSWERED", questionsAnswered)
+        outState.putInt("CORRECT_ANSWERED", correctAnswered)
+        outState.putString("OPERAND_1_TEXT", operand1TextView.text.toString())
+        outState.putString("OPERAND_2_TEXT", operand2TextView.text.toString())
+        outState.putString("OPERATOR_TEXT", operatorTextView.text.toString())
+        outState.putBoolean("GENERATE_BUTTON_STATE", generateButton.isEnabled)
+        outState.putBoolean("SUBMIT_BUTTON_STATE", submitButton.isEnabled)
     }
 
     private fun generateRandomProblem() {
