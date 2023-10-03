@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Flashcard</string>
+    <string name="welcome_to_flashcard_app_please_login_here">Welcome to Flashcard App! Please login here</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="your_answer_here">Your answer here</string>
+    <string name="generate_10_random_problems">Generate 10 Random Problems</string>
+</resources>
