@@ -5,13 +5,16 @@
     android:padding="16dp">
 
     <Button
-        android:id="@+id/generateProblemsButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/submitAnswerButton"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
         android:layout_centerHorizontal="true"
+
         android:layout_marginTop="80dp"
         android:layout_marginBottom="100dp"
-        android:text="@string/generate_10_random_problems" />
+        android:text="Submit Answer"
+        android:backgroundTint="#228B22"
+        />
 
     <TextView
         android:id="@+id/op1TextView"
@@ -20,7 +23,7 @@
         android:text="99"
         android:textSize="40sp"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/generateProblemsButton"/>
+        android:layout_below="@+id/submitAnswerButton" />
 
     <TextView
         android:id="@+id/operatorTextView"
@@ -54,10 +57,10 @@
         android:inputType="number" />
 
     <Button
-        android:id="@+id/submitAnswerButton"
+        android:id="@+id/generateProblemsButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Submit"
+        android:text="Generate 10 Random Problems"
         android:layout_below="@+id/answerEditText"
         android:layout_marginTop="20dp"/>
 
