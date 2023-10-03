@@ -13,6 +13,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AppCompatActivity
 import java.util.Random
 
@@ -25,7 +26,7 @@ class FlashcardActivity : AppCompatActivity() {
     private lateinit var submitButton: Button
     private lateinit var generateButton: Button
     private val random = Random()
-    private var currentAnswer: Int = 0
+    var currentAnswer: Int = 0
     private var questionsAnswered: Int = 0
     private var correctAnswered: Int = 0
 
@@ -125,8 +126,8 @@ class FlashcardActivity : AppCompatActivity() {
         operand2TextView.text = operand2.toString()
     }
 
-
-    private fun isAnswerCorrect(userAnswer: Int): Boolean {
+    @VisibleForTesting
+    fun isAnswerCorrect(userAnswer: Int): Boolean {
         questionsAnswered++
         val correct = userAnswer == currentAnswer
         if (correct) {
