@@ -49,6 +49,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/op2TextView"
         android:layout_marginTop="52dp"
+        android:gravity="center"
         android:layout_centerHorizontal="true"
         android:hint="@string/your_answer_here"
         android:inputType="number" />
