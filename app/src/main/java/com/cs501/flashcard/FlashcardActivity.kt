@@ -125,15 +125,21 @@ class FlashcardActivity : AppCompatActivity() {
         operand2TextView.text = operand2.toString()
     }
 
+
+    private fun isAnswerCorrect(userAnswer: Int): Boolean {
+        questionsAnswered++
+        val correct = userAnswer == currentAnswer
+        if (correct) {
+            correctAnswered++
+        }
+        return correct
+    }
+
     private fun checkAnswer(userAnswer: Int) {
-        if (userAnswer == currentAnswer) {
+        if (isAnswerCorrect(userAnswer)) {
             Toast.makeText(this, "Correct!", Toast.LENGTH_SHORT).show()
         } else {
-            Toast.makeText(this, "Incorrect. Correct answer: $currentAnswer", Toast.LENGTH_SHORT).show()
-        }
-        questionsAnswered++
-        if (userAnswer == currentAnswer) {
-            correctAnswered++
+            Toast.makeText(this, "Incorrect! Correct answer: $currentAnswer", Toast.LENGTH_SHORT).show()
         }
     }
 }
